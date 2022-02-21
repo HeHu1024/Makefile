@@ -1,10 +1,20 @@
-all: main.o func.o
-	gcc -o app.out main.o func.o
+### use the make variable
+CC = gcc
+RM = rm
+
+
+EXE = simple.exe
+OBJS = main.o func.o
+
+
+.PHONY: clean   #.PHONY define a target and the make will not do the target for file
+
+
+$(EXE): $(OBJS)
+	$(CC) -o $@ $^
 main.o: main.c
-	gcc -o main.o -c main.c
+	$(CC) -o $@ -c $^
 func.o: func.c
-	gcc -o func.o -c func.c
-
-
+	$(CC) -o $@ -c $^
 clean:
-	rm app.out *.o
+	$(RM) -fr $(EXE) *.o
